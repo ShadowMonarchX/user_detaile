@@ -1,0 +1,80 @@
+<div class="container-fluid maindiv">
+  <form
+    [formGroup]="registerForm"
+    (ngSubmit)="onSubmit()"
+    class="border p-2 g-col-6 mt-2"
+  >
+    <div class="row">
+      <div class="mb-3">
+        <label class="form-label" for="email">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          formControlName="email"
+          name="email"
+          placeholder="Enter email"
+          [class.is-invalid]="
+            registerForm.get('email')?.invalid &&
+            (registerForm.get('email')?.dirty ||
+              registerForm.get('email')?.touched)
+          "
+        />
+        <div
+          *ngIf="
+            registerForm.get('email')?.invalid &&
+            (registerForm.get('email')?.dirty ||
+              registerForm.get('email')?.['touched'])
+          "
+          class="invalid-feedback"
+        >
+          <div *ngIf="registerForm.get('email')?.errors?.['required']">
+            Email is required
+          </div>
+          <div *ngIf="registerForm.get('email')?.errors?.['email']">
+            Please enter a valid email address
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          formControlName="password"
+          id="password"
+          name="password"
+          placeholder="Enter Password"
+          [class.is-invalid]="
+            registerForm.get('password')?.invalid &&
+            (registerForm.get('password')?.dirty ||
+              registerForm.get('password')?.touched)
+          "
+        />
+        <div
+          *ngIf="
+            registerForm.get('password')?.invalid &&
+            (registerForm.get('password')?.dirty ||
+              registerForm.get('password')?.touched)
+          "
+          class="invalid-feedback"
+        >
+          <div *ngIf="registerForm.get('password')?.errors?.['required']">
+            Password is required
+          </div>
+          <div *ngIf="registerForm.get('password')?.errors?.['minlength']">
+            Password must be 5 characters long.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      <div class="col">
+        <a routerLink="/auth/login" class="btn btn-primary">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>

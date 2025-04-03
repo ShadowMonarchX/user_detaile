@@ -1,0 +1,60 @@
+<div class="container-fluid">
+  <div class="input-group mb-3 mt-2">
+    <div class="col-md-2">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="filterText"
+        placeholder="Filter users"
+        (input)="onFilterTextChange()"
+      />
+    </div>
+    &nbsp;
+    <div class="input-group-append">
+      <i
+        class="bi bi-x-square"
+        (click)="clearFilter()"
+        (keyup.enter)="clearFilter()"
+        tabindex="0"
+      ></i>
+    </div>
+  </div>
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">City</th>
+        <th scope="col">Contact Number</th>
+        <th scope="col" *ngIf="userList">Actions</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="userList.length >= 1">
+      <tr *ngFor="let data of userList; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ data.firstname }}</td>
+        <td>{{ data.lastname }}</td>
+        <td>{{ data.city }}</td>
+        <td>{{ data.contactnumber }}</td>
+        <td>
+          <ng-container *ngIf="isUserRecord(data.creator)">
+            <i
+              class="bi bi-pencil-square"
+              [routerLink]="['/userprofile/edit', data?._id]"
+            ></i>
+            <a
+              (click)="onUserDelete(data._id)"
+              (keyup.enter)="onUserDelete(data._id)"
+              tabindex="0"
+              ><i class="bi bi-archive-fill"></i
+            ></a>
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-center" *ngIf="userList.length === 0">
+    No data found!
+  </div>
+</div>

@@ -1,0 +1,160 @@
+<div class="container">
+  <div class=" ">
+    <form
+      [formGroup]="userProfileForm"
+      (ngSubmit)="onSubmit()"
+      class="border loginForm p-2 g-col-6 mt-2"
+    >
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label" for="firstname">First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="firstname"
+              id="firstname"
+              name="firstname"
+              placeholder="Enter First Name"
+              [class.is-invalid]="
+                userProfileForm.get('firstname')?.invalid &&
+                (userProfileForm.get('firstname')?.dirty ||
+                  userProfileForm.get('firstname')?.touched)
+              "
+            />
+            <div
+              *ngIf="
+                userProfileForm.get('firstname')?.invalid &&
+                (userProfileForm.get('firstname')?.dirty ||
+                  userProfileForm.get('firstname')?.touched)
+              "
+              class="invalid-feedback"
+            >
+              <div
+                *ngIf="userProfileForm.get('firstname')?.errors?.['required']"
+              >
+                First Name is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label" for="lastname">Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="lastname"
+              id="lastname"
+              name="lastname"
+              placeholder="Enter Last Name"
+              [class.is-invalid]="
+                userProfileForm.get('lastname')?.invalid &&
+                (userProfileForm.get('lastname')?.dirty ||
+                  userProfileForm.get('lastname')?.touched)
+              "
+            />
+            <div
+              *ngIf="
+                userProfileForm.get('lastname')?.invalid &&
+                (userProfileForm.get('lastname')?.dirty ||
+                  userProfileForm.get('lastname')?.touched)
+              "
+              class="invalid-feedback"
+            >
+              <div
+                *ngIf="userProfileForm.get('lastname')?.errors?.['required']"
+              >
+                Last Name is required
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Repeat this structure for the next pair of input fields -->
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label" for="city">City</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="city"
+              id="city"
+              name="city"
+              placeholder="Enter City"
+              [class.is-invalid]="
+                userProfileForm.get('city')?.invalid &&
+                (userProfileForm.get('city')?.dirty ||
+                  userProfileForm.get('city')?.touched)
+              "
+            />
+            <div
+              *ngIf="
+                userProfileForm.get('city')?.invalid &&
+                (userProfileForm.get('city')?.dirty ||
+                  userProfileForm.get('city')?.touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="userProfileForm.get('city')?.errors?.['required']">
+                City is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label" for="contactnumber">Phone Number</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="contactnumber"
+              id="contactnumber"
+              name="contactnumber"
+              placeholder="Enter Contact Number"
+              [class.is-invalid]="
+                userProfileForm.get('contactnumber')?.invalid &&
+                (userProfileForm.get('contactnumber')?.dirty ||
+                  userProfileForm.get('contactnumber')?.touched)
+              "
+            />
+            <div
+              *ngIf="
+                userProfileForm.get('contactnumber')?.invalid &&
+                (userProfileForm.get('contactnumber')?.dirty ||
+                  userProfileForm.get('contactnumber')?.touched)
+              "
+              class="invalid-feedback"
+            >
+              <div
+                *ngIf="
+                  userProfileForm.get('contactnumber')?.errors?.['required']
+                "
+              >
+                Contact Number is required
+              </div>
+              <div
+                *ngIf="
+                  userProfileForm.get('contactnumber')?.errors?.['minlength']
+                "
+              >
+                Contact Number must be 10 characters long.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        <div class="col">
+          <a routerLink="/dashboard" class="btn btn-primary">Cancel</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
